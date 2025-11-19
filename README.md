@@ -8,7 +8,7 @@ If you just want to use the handy default docker image, you need not clone this 
 
 2) docker run --rm -it -p 5000:5000 jazzbox35/mwj:latest
 
-Note: the order of ports is host:container; so if you want your machine to call docker using port 80 you would use 80:5000.
+Note: the order of ports is host:container; so if you want your machine to call docker using port 80 you would use 80:5000 as in the examples following.
 
 3) curl -X POST http://localhost:80/metta -H "Content-Type: text/plain" --data '!(+ 1 2)'
  
