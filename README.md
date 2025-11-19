@@ -18,3 +18,5 @@ This command will return a result of [3] if the installation worked.
 
 Shut down the server gracefully when done.
 
+
+If you wish to modify the server, then clone the repo, modify as desired for your installation, and rebuild the Dockerfile. 
