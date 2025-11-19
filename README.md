@@ -12,11 +12,11 @@ Note: the order of ports is host:container; so if you want your machine to call 
 
 3) curl -X POST http://localhost:80/metta -H "Content-Type: text/plain" --data '!(+ 1 2)'
  
-This command will return a result of [3] if the installation worked.
+This command (run from your machine outside of docker) will return a result of [3] if the installation worked.
 
 4) curl -X POST http://localhost:80/stop 
 
-Shut down the server gracefully when done.
+Shut down the server and docker container gracefully when done (again run from your machine outside docker).
 
 
 If you wish to modify the server, then clone the repo, modify as desired for your installation, and rebuild the Dockerfile. 
