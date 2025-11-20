@@ -15,7 +15,7 @@ Note: the order of ports is host:container; so if you want your machine to call 
  
 The above command will return a result of [3] if the installation worked.
 
-4) <pre><B>curl -X POST http&#58;//localhost:5000/stop</B></pre>
+4) <B>curl -X POST http&#58;//localhost:5000/stop</B>
 
 The above will shut down the server and docker container gracefully when done (again run from your machine outside docker).
 
@@ -23,3 +23,13 @@ The above will shut down the server and docker container gracefully when done (a
 If you wish to modify the server, then clone the repo, modify as desired for your installation, and rebuild the Dockerfile. 
 
 "WAM" is an acronym for Warren Abstract Machine.
+
+<div id="copyme">This text will be copied.</div>
+
+<button onclick="
+navigator.clipboard.writeText(
+    document.getElementById('copyme').innerText
+);
+">
+Copy text
+</button>
