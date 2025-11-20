@@ -11,7 +11,7 @@ If you just want to use the handy default docker image, you need not clone this 
 Note: the order of ports is host:container; so if you want your machine to call docker using port 80 you would use 80:5000. Once the server starts in a docker container, it will display the ?- Prolog prompt. Just ignore this window until you issue the stop command (below).
 
 3) *Open a new terminal command line and run this command:*
-<B>curl -X POST http://localhost:5000/metta -H "Content-Type: text/plain" --data '!(+ 1 2)'</B>
+<B>curl -X POST http&#58;//localhost:5000/metta -H "Content-Type: text/plain" --data '!(+ 1 2)'</B>
  
 The above command will return a result of [3] if the installation worked.
 
