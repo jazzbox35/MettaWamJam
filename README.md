@@ -14,7 +14,7 @@ OR WITH YOUR ATOMSPACE
 <br>
 <B>docker run --rm -it -p 5000:5000 -v ATOMSPACE:/PeTTa/atomspace.metta jazzbox35/mwj:latest</B>
 <P><P>
-To pass an input atomspace (any '.metta' file) replace the all-caps "ATOMSPACE" above with the full path to your .metta file.
+To pass an input atomspace (any '.metta' file) replace the all-caps ATOMSPACE above with the full path to your .metta file. Example:  /home/user/my_file.metta:/PeTTa/atomspace.metta  (no quotes)
 
 Note: the order of ports is host:container; so if you want your machine to call docker using port 80 you would use 80:5000. Once the server starts in a docker container, it will display the ?- Prolog prompt. Just ignore this window until you issue the stop command (below).
 
