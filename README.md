@@ -2,6 +2,7 @@
 
 MWJ is lightweight, blazing fast SWI-Prolog HTTP server for MeTTa. It provides a /metta endpoint for MeTTa execution and /stop for controlled shutdown. MWJ loads the PeTTa transpiler and your optional input MeTTa file (atomspace / code), running on localhost using a configurable port (default 5000). MWJ is not intended for public deployment without additional security hardening, so you should craft your front end if needed. You could, for example, create an Apache front end facing the public internet with security authentications, input sanitizing, etc, that calls the MWJ server. There is no security specifically built in to the MWJ server.
 
+
 <B>If you just want to use the handy default docker image just run these commands (no need to clone repo):</B>
 
 1) <B>docker pull jazzbox35/mwj</B>
@@ -20,16 +21,9 @@ The above command will return a result of [3] if the installation worked.
 The above will shut down the server and docker container gracefully when done (again run from your machine outside docker).
 
 
-If you wish to modify the server, then clone the repo, modify as desired for your installation, and rebuild the Dockerfile. 
+
+If you wish to modify the server, then clone the repo, modify as desired for your installation, and rebuild the docker image using Dockerfile. 
 
 "WAM" is an acronym for Warren Abstract Machine.
 
-<div id="copyme">This text will be copied.</div>
 
-<button onclick="
-navigator.clipboard.writeText(
-    document.getElementById('copyme').innerText
-);
-">
-Copy text
-</button>
