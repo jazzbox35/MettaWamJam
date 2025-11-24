@@ -36,9 +36,9 @@
 :- use_module(library(http/thread_httpd)).
 :- use_module(library(http/http_dispatch)).
 :- use_module(library(http/http_client)).
-:- use_module(library(http/http_json)).  
+%:- use_module(library(http/http_json)).  
 :- use_module(library(http/http_header)).  
-:- use_module(library(json)).  
+%:- use_module(library(json)).  
 
 
 % If the user submits a malformed query, this code will prevent a halt of the swipl server
