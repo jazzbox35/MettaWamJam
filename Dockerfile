@@ -28,7 +28,7 @@ EXPOSE 5000
 #CMD ["swipl", "mwj.pl"]
 
 # Always run your server
-ENTRYPOINT ["swipl", "mwj.pl"]
+ENTRYPOINT ["swipl", "mwj.pl", "atomspace.metta"]
 
 # 👇 **No default argument**
 CMD []
