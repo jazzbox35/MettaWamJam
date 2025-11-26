@@ -8,7 +8,7 @@ MWJ is not intended for public deployment without additional security hardening,
 <B>If you just want to use the handy default docker image make sure you have docker installed on your machine and then just run these commands (no need to clone repo):</B>
 
 <hr>
-<B>1. 'docker pull jazzbox35/mwj'</B>
+<B>1. docker pull jazzbox35/mwj</B>
 <hr>
 <B>2. docker run --rm -d --name mwj -p 127.0.0.1:5000:5000 --tty jazzbox35/mwj:latest</B>
 <br>
