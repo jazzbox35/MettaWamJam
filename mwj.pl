@@ -1,7 +1,6 @@
 /*  mwj.pl - HTTP Metta Server
 %
 %   @author Mike Archbold
-%   @version 0.1
 %   @title MettaWamJam Server  (Warren Abstract Machine for MeTTa)
 %
 %   This program implements an HTTP server in SWI-Prolog that provides
@@ -13,7 +12,7 @@
 %   optional MeTTa file input from the command-line arguments, and initializes
 %   the HTTP server on a configurable port (default 5000).
 %
-%   This server is intended to be run locally only. Do not expose this
+%   This server is intended to be called locally only. Do not expose this
 %   server to the public internet until proper input sanitization, authentication,
 %   and security hardening have been implemented on a front end.
 %
@@ -60,13 +59,13 @@ halt(Status) :- format("Blocked halt(~w).~n", [Status]), !.
 %
 %   @example
 %     ?- server(5000).
-%     % Starts the server on localhost:5000.
+%     % Starts the server listening on port 5000.
 server(Port) :-						
         http_server(http_dispatch, [port(Port)]).
 
 
 % --- Load PeTTa Prolog code to handle MeTTa calls ------------- %
-:- ensure_loaded('./src/metta.pl').     % <-- LOADS PETTA HERE
+:- ensure_loaded('./src/metta.pl').         % <-- LOADS PETTA HERE
 % -------------------------------------------------------------- %
 
 
@@ -139,7 +138,7 @@ stop(_Request) :-
     format('Content-type: text/plain~n~n'),
     format('Stopping server...~n'),
     flush_output,
-    % 2. Stop server + exit from a *separate* thread
+    %  Stop server + exit from a *separate* thread
     thread_create(
         ( sleep(0.1),                        
           http_current_server(http_dispatch, Port),

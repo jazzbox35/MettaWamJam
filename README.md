@@ -1,6 +1,8 @@
 # MettaWamJam
 
-MWJ is lightweight, blazing fast SWI-Prolog HTTP server for MeTTa. It provides a /metta endpoint for MeTTa execution and /stop for controlled shutdown. MWJ loads the PeTTa transpiler and your optional input MeTTa file (atomspace / code), running on localhost using a configurable port (default 5000). MWJ is not intended for public deployment without additional security hardening, so you should craft your front end if needed. You could, for example, create an Apache front end facing the public internet with security authentications, input sanitizing, etc, that calls the MWJ server. There is no security specifically built in to the MWJ server.
+MWJ is lightweight, blazing fast SWI-Prolog HTTP server for MeTTa. It provides a /metta endpoint for MeTTa execution and /stop for controlled shutdown. MWJ loads the PeTTa transpiler and your optional input MeTTa file (atomspace / code). The server listens on a configurable port (default localhost:5000 in commands below). 
+<P><P>
+MWJ is not intended for public deployment without additional security hardening, so you should craft your front end if needed. You could, for example, create an Apache front end facing the public internet with security authentications, input sanitizing, etc, that calls the MWJ server. There is no security specifically built in to the MWJ server.
 
 
 <B>If you just want to use the handy default docker image make sure you have docker installed on your machine and then just run these commands (no need to clone repo):</B>
@@ -8,15 +10,15 @@ MWJ is lightweight, blazing fast SWI-Prolog HTTP server for MeTTa. It provides a
 <hr>
 <B>1. docker pull jazzbox35/mwj</B>
 <hr>
-<B>2. docker run --rm -d --name mwj -p 5000:5000 --tty jazzbox35/mwj:latest</B>
+<B>2. docker run --rm -d --name mwj -p 127.0.0.1:5000:5000 --tty jazzbox35/mwj:latest</B>
 <br>
 OR WITH YOUR ATOMSPACE
 <br>
-<B>docker run --rm -d --name mwj -p 5000:5000 --tty -v ATOMSPACE:/PeTTa/atomspace.metta jazzbox35/mwj:latest</B>
+<B>docker run --rm -d --name mwj -p 127.0.0.1:5000:5000 --tty -v ATOMSPACE:/PeTTa/atomspace.metta jazzbox35/mwj:latest</B>
 <P><P>
 To pass an input atomspace (any '.metta' file) replace the all-caps ATOMSPACE above with the full path to your .metta file. Example:  /home/user/my_file.metta:/PeTTa/atomspace.metta  (no quotes)
 
-Note: the order of ports is host:container; so if you want your machine to call docker using port 80 you would use 80:5000. 
+Note: the order of ports is host:container; so if you want your machine to call docker using port 80 you would use 127.0.0.1:80:5000. 
 
 <hr>
 3. 
