@@ -2,9 +2,15 @@
 #
 # Includes:  PeTTa, MORK, PathMap
 
+#################################################################
+#    To create arm64 if building on amd64:
+# docker buildx create --use --name mwjbuilder
+# docker buildx build --platform linux/arm64 -t mwj:arm64 --load 
+#################################################################
+
 FROM swipl:latest
 
-# Install system build tools, Python, and Apache
+# Install system build tools, Python, etc
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
       git \
@@ -53,15 +59,13 @@ RUN sh build.sh
 # The Prolog server listens on 5000
 EXPOSE 5000
 
-#CMD ["swipl", "mwj.pl"]
-
 # Start server
-#ENTRYPOINT ["swipl", "mwj.pl", "atomspace.metta"]
+
+#ENTRYPOINT ["swipl", "mwj.pl", "atomspace.metta"]  # Works with no MORK startup
+
+# LD_PRELOAD needed for MORK
 ENV LD_PRELOAD=/PeTTa/mork_ffi/target/release/libmork_ffi.so
 
-ENTRYPOINT ["swipl","--stack_limit=8g","-q","-s", "mwj.pl","--","mork"]
-
-
-# 👇 **No default argument**
-CMD []
+# Start swipl with mwj.pl. If user connects an atomspace to /PeTTa/atomspace.metta mwj.pl loads.
+ENTRYPOINT ["swipl","--stack_limit=8g","-q","-s", "mwj.pl","--","atomspace.metta","mork"]
       
