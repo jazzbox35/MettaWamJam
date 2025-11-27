@@ -2,7 +2,7 @@
 
 MWJ is a lightweight, blazing-fast SWI-Prolog HTTP server for MeTTa. It provides a `/metta` endpoint for MeTTa execution and `/stop` for controlled shutdown. MWJ runs the PeTTa transpiler for MeTTa and loads an atomspace (if provided). You can also run MM2 programs on top of MORK using this server. Please see the example Python programs in this repo for running your MeTTa and MM2 programs.
 
-MWJ is not intended for public deployment without additional security hardening, so you should craft your front end if needed. You could, for example, create an Apache front end facing the public internet and restrict access to the MWJ server.
+MWJ is not intended for public deployment without additional security hardening, so you should craft your front end, firewall, etc as needed. You could, for example, create an Apache front end facing the public internet and restrict access to the MWJ server.
 
 <B>If you just want to use the handy default Docker image make sure you have Docker installed on your machine and then run the commands below. There is no need to clone the repo. The default settings will limit access to the MWJ server to your machine (ie., localhost on 127.0.0.1:5000).</B>
 
