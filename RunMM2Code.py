@@ -4,7 +4,7 @@ import requests
 url = "http://localhost:5000/metta"
 headers = {"Content-Type": "text/plain"}
 
-# Place your MORK code below, start the MWJ server, and run this program under Python.
+# Place your MM2 code below, start the MWJ server, and run this program under Python.
 data = """
 
 !(add-atom &mork (friend sam tim))
