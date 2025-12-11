@@ -39,3 +39,4 @@ docker stop mwj
 If you wish to modify the server, clone the repo, change the code as desired for your installation, and rebuild the Docker image using the included `Dockerfile`.
 
 "WAM" is an acronym for Warren Abstract Machine.
+"JAM" is you get fast MeTTa, MORK in an AI toolbox!
