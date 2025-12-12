@@ -4,8 +4,7 @@ import requests
 url = "http://localhost:5000/metta"
 headers = {"Content-Type": "text/plain; charset=utf-8" }
 
-# Faiss is a library for efficient similarity search and clustering of dense vectors.
-# Faiss contains several methods for similarity search.
+# Example of using MeTTa and pytorch.
 data = """
 
 ;Clean separation from Python calls
