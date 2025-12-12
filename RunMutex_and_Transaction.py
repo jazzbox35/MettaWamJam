@@ -18,7 +18,7 @@ data = """
            (let $inc (+ $x 1)
                      (add-atom &temp (count $inc))))))
 
-;To protect from data reace we can use a mutex:
+;To protect from data race we can use a mutex:
 (= (mutexinc)
    (with_mutex testmutex
                (match &temp (count $x)
