@@ -35,7 +35,7 @@ Alternatively, stop the Docker container directly:
 ```bash
 docker stop mwj
 ```
-
+To experiment with running MeTTa code, clone the RunMeTTaCode.py program in the repo. 
 If you wish to modify the server, clone the repo, change the code as desired for your installation, and rebuild the Docker image using the included `Dockerfile`.
 
 "WAM" is an acronym for Warren Abstract Machine.
