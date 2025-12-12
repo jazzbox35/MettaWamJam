@@ -31,6 +31,14 @@
 %     see your typing 'reset'.
 */
 
+%***************************** CAUTION ***************************************
+%   In general, avoid modifying predicates used by the /PeTTa repo. If necessary,
+%   check with the PeTTa or associated teams. The only variable to be set in this
+%   program is:
+%                       working_dir(Value), the working directory
+%*****************************************************************************
+
+
 % Import necessary modules for running an HTTP server, dispatching requests,
 % and making HTTP client calls.
 :- use_module(library(http/thread_httpd)).
@@ -66,7 +74,7 @@ server(Port) :-
 
 
 % --- Load PeTTa Prolog code to handle MeTTa calls ------------- %
-:- ensure_loaded('./src/metta.pl').         % <-- LOADS PETTA HERE
+:- ensure_loaded('metta.pl').         % <-- LOADS PETTA HERE
 % -------------------------------------------------------------- %
 
 
@@ -90,13 +98,9 @@ server(Port) :-
 %     $ swipl mwj.pl MyAtomSpace.metta
 %
 :- 
-   % Set working directory
-   working_directory(Dir, Dir),               % Variable appears twice but just returns working dir.
-   assertz(working_dir(Dir)),
-   % assertz(working_dir('/PeTTa/faiss_ffi')),  % Hack for docker to see example faiss
-   working_dir(Dir),
-   format("~nmwj working directory > ~w~n~n", Dir),!,
-
+   % Set relative working directory, default to .
+   assertz(working_dir(".")),
+    
    % Check arguments passed...
    current_prolog_flag(argv, Args),
    ( Args = [] ->
@@ -105,14 +109,18 @@ server(Port) :-
         true                                  % Special no-op argument → do nothing
    ; Args = [File|_] ->                       % First argument is a file path
         (   exists_file(File)
-        ->  file_directory_name(File, _),     % Extracts atomspace directory (presently nulled out)
+        ->  file_directory_name(File, Dir),   % Extracts atomspace directory (relative)
+            retractall(working_dir(_)),       % Retract default working directory 
+            assertz(working_dir(Dir)),        % Reset relative working directory to input file directory
             load_metta_file(File, Results),   % Load MeTTa file / atomspace
             format("~nmwj successfully loaded user atomspace... ~n~n"),
             maplist(swrite, Results, ResultsR),   % Convert results to string representations
             maplist(format("~w~n"), ResultsR)     % Print results
         ;   format("~nmwj no initial atomspace found... ~n~n")   % File not found → skip loading
         )
-   ).
+   ),
+   working_dir(WorkingDir_Final),
+   format("~nmwj working directory > ~w~n~n", WorkingDir_Final).
 
 %!  metta(+Request) is det.
 %

@@ -8,7 +8,7 @@ headers = {"Content-Type": "text/plain; charset=utf-8" }
 # Faiss contains several methods for similarity search.
 data = """
 
-!(import! &self lib_faiss)
+!(import! &self (library faiss_ffi lib_faiss))
 
 ;providing our own embeddings:
 !(new-atom-vectorspace &avs 4)
@@ -18,14 +18,14 @@ data = """
 !(test (atom-of (match-k 1 &avs (0.09 0.19 0.29 0.39)))
        a)
 
-;structural random indexing for atoms:
+;cheap structural random indexing for atoms:
 !(new-atom-vectorspace &sri 20)
 !(add-atom-SRI &sri ((red apple) strudel))
 !(add-atom-SRI &sri ((yellow banana) strudel))
 !(add-atom-SRI &sri (strudel chaos))
 !(test (atom-of (match-SRI 1 &sri ((red strawberry) strudel)))
        ((red apple) strudel))
-                    
+
 """
 
 response = requests.post(url, headers=headers, data=data.encode("utf-8"))

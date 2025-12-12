@@ -50,7 +50,7 @@ RUN pip3 install --no-cache-dir --break-system-packages janus-swi
 # 👇 PETTA INSTALL
 # Clone PeTTa repository directly into /PeTTa
 RUN git clone https://github.com/patham9/PeTTa.git /PeTTa
-COPY mwj.pl /PeTTa
+COPY mwj.pl /PeTTa/src
 
 # 👇 Install facebook research Faiss, contains several methods for similarity search.
 WORKDIR /PeTTa
@@ -79,11 +79,14 @@ EXPOSE 5000
 
 # Start server
 
+WORKDIR /PeTTa/src
+
 # ENTRYPOINT ["swipl", "mwj.pl", "atomspace.metta"]  # Works with no MORK startup
 
 # LD_PRELOAD needed for MORK
 ENV LD_PRELOAD=/PeTTa/mork_ffi/target/release/libmork_ffi.so
 
-# Start swipl with mwj.pl. If user connects an atomspace to /PeTTa/atomspace.metta mwj.pl loads.
-ENTRYPOINT ["swipl","--stack_limit=8g","-q","-s", "mwj.pl","--","atomspace.metta","mork"]
+# Start swipl with mwj.pl. If user connects an atomspace, mwj.pl loads.
+# User needs to use the /PeTTa/mount directory for all file mounts.
+ENTRYPOINT ["swipl","--stack_limit=8g","-q","-s", "mwj.pl","--","../mount/atomspace.metta","mork"]
 
