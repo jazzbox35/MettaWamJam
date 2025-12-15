@@ -46,8 +46,8 @@ IF YOU WANT DOCKER TO CLEAR AND RESTART YOUR ATOMSPACE AUTOMATICALLY USING /stop
        2) When you desire to refresh your atomspace from scratch issue /stop for this purpose.
        3) Use `docker stop <container>` instead of /stop to definitely stop the container.
        4) To restart, use `docker restart <container>` not `docker run...` since omitting -rm will 
-          retain the container. The -rm parameter will remove the container every run. Omitting it
-          will retain it.
+          retain the container. The -rm parameter will remove the container every run. Omitting rm
+          will retain your container and you will have to restart it.
 
 To experiment with running MeTTa code, clone the RunMeTTaCode.py program in the repo. 
 If you wish to modify the server, clone the repo, change the code as desired for your installation, and rebuild the Docker image using the included `Dockerfile`.
