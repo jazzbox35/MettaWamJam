@@ -38,5 +38,18 @@ docker stop mwj
 To experiment with running MeTTa code, clone the RunMeTTaCode.py program in the repo. 
 If you wish to modify the server, clone the repo, change the code as desired for your installation, and rebuild the Docker image using the included `Dockerfile`.
 
+   ** IF YOU WANT TO USE /stop TO CLEAR AND RESTART ATOMSPACE WITH DOCKER: **
+
+   Use of the `--restart=always` parameter in your "docker run" command will force Docker to
+   immediately restart the server from scratch. This is useful if you want to clear
+   atomspace, easily restarting with a refreshed environment. If you use `--restart=always`
+   for this purpose (in your docker run command), follow these steps:
+
+       1) Use "docker stop <container>" instead of /stop to stop the container (no restart)
+       2) Omit -rm from the docker run command line
+       3) To restart, use "docker restart <container>" not "docker run" since omitting -rm will 
+          retain the container. The -rm parameter will remove the container every run. Omitting it
+          will retain it.
+
 "WAM" is an acronym for Warren Abstract Machine.
 "JAM" is you get fast MeTTa, MORK in an AI toolbox!

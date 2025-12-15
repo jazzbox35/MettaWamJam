@@ -56,8 +56,8 @@ halt(Status) :- format("Blocked halt(~w).~n", [Status]), !.
 % Register HTTP handlers for the /metta and /stop routes.
 % These handlers will be invoked when HTTP requests are made to the respective paths.
 :- http_handler(root(metta), metta, []).		
+:- http_handler(root(metta_stateless), metta_stateless, []).  
 :- http_handler(root(stop), stop, []).  
-:- http_handler(root(reset), reset, []).  
 
 %!  server(+Port) is det.
 %
@@ -70,7 +70,7 @@ halt(Status) :- format("Blocked halt(~w).~n", [Status]), !.
 %     ?- server(5000).
 %     % Starts the server listening on port 5000.
 server(Port) :-						
-        http_server(http_dispatch, [port(Port),workers(1)]).  % workers = 1 prevents multi-threading
+        http_server(http_dispatch, [port(Port),workers(5)]).  % workers = 1 prevents multi-threading
 
 
 % --- Load PeTTa Prolog code to handle MeTTa calls ------------- %
@@ -146,14 +146,41 @@ metta(Request) :-
         maplist(swrite,Result,ResultsR),   
         write(ResultsR).
 
+%   This variation is a temporary experimental expedient so a stateless server can be accomodated.
+metta_stateless(Request) :-
+        http_read_data(Request, Body, [to(string)]),
+        format('Content-type: application/json~n~n'),
+        % suppress output other than the result
+        with_output_to(string(_),
+                process_metta_string(Body, Result)
+            ),
+        maplist(swrite,Result,ResultsR),   
+        write(ResultsR),
+        % This presently stops the main mwj.pl. Redesign so a new process is forked and
+        % halted when finished. This program needs to keep running or Docker might have problems.
+        thread_create(( sleep(0.05),halt),_,[detached(true)]).
+
 %!  stop(+Request) is det.
 %
-%   HTTP handler for the `/stop` endpoint. Gracefully shuts down the server.
+%   The /stop endpoint will clear atomspace and halt this program. 
 %   Responds with a confirmation message, then spawns a detached thread that
 %   stops the HTTP server and halts the Prolog process.
 %
 %   This design avoids blocking the current HTTP thread while the server
 %   is shutting down.
+%
+%   ** IF YOU WANT TO USE /stop TO CLEAR AND RESTART ATOMSPACE WITH DOCKER: **
+%
+%   If running in Docker with `--restart=always` with "docker run...", the container will
+%   immediately restart after this call. This is useful if you want to clear
+%   atomspace, easily restarting with a refreshed environment. If you use --restart=always
+%   for this purpose, follow these steps:
+%
+%       1) Use "docker stop <container>" instead of /stop to stop the container (no restart)
+%       2) Omit -rm from the docker run command line
+%       3) Use "docker restart <container>" not "docker run" since omitting -rm will 
+%          retain the container.
+%
 stop(_Request) :-
     format('Content-type: text/plain~n~n'),
     format('Stopping server...~n'),
@@ -168,19 +195,6 @@ stop(_Request) :-
         _,
         [detached(true)]
     ).
-
-% Need means of prolog level reset...
-reset(_Request) :-  
-    %forall(
-    %    ( current_predicate(Name/Arity),
-    %      functor(Head, Name, Arity),
-    %      predicate_property(Head, dynamic)
-    %    ),
-    %    retractall(Head)
-    %),
-    %make,
-    format("Content-type: text/plain~n~n"),
-    format("Reset complete.~n").
 
 % Start the Prolog server
 :- server(5000),
