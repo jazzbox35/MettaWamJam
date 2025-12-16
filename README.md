@@ -47,7 +47,7 @@ IF YOU WANT DOCKER TO CLEAR AND RESTART YOUR ATOMSPACE AUTOMATICALLY USING /stop
        1) Add `--restart=always` and omit `--rm` from the docker run command line.
        2) When you desire to refresh your atomspace from scratch issue /stop for this purpose.
        3) Use `docker stop <container>` instead of /stop to definitely stop the container.
-       4) To restart, use `docker restart <container>` not `docker run...` since omitting -rm will 
+       4) To restart, use `docker restart <container>` not `docker run...` since omitting --rm will 
           retain the container. The --rm parameter will remove the container every run. 
           Omitting --rm will retain your container and you will have to restart it.
 
