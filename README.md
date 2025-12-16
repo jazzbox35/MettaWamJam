@@ -26,6 +26,9 @@ curl -X POST http://localhost:5000/metta \
   --data '!(+ 1 2)'
 ```
 The above command should return a result of `[3]` if the installation worked. For curl commands, always put single quotes (') around your MeTTa query to avoid shell interpolation.
+To experiment with running MeTTa code, clone the RunMeTTaCode.py program in the repo. 
+If you wish to modify the server, clone the repo, change the code as desired for your installation, and rebuild the Docker image using the included `Dockerfile`.
+
 
 <B>3. Stop the server (graceful)</B>
 ```bash
@@ -48,9 +51,6 @@ IF YOU WANT DOCKER TO CLEAR AND RESTART YOUR ATOMSPACE AUTOMATICALLY USING /stop
        4) To restart, use `docker restart <container>` not `docker run...` since omitting -rm will 
           retain the container. The -rm parameter will remove the container every run. Omitting -rm
           will retain your container and you will have to restart it.
-
-To experiment with running MeTTa code, clone the RunMeTTaCode.py program in the repo. 
-If you wish to modify the server, clone the repo, change the code as desired for your installation, and rebuild the Docker image using the included `Dockerfile`.
 
 "WAM" is an acronym for Warren Abstract Machine.
 "JAM" is you get fast MeTTa, MORK in an AI toolbox!
