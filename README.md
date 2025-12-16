@@ -38,7 +38,7 @@ docker stop mwj
 IF YOU WANT DOCKER TO CLEAR AND RESTART YOUR ATOMSPACE AUTOMATICALLY USING /stop:
 
    Use of the `--restart=always` parameter in your "docker run" command will force Docker to
-   immediately stop and restart the server from scratch. This is useful if you want to clear
+   stop and immediately restart the server from scratch. This is useful if you want to clear
    atomspace, easily restarting with a refreshed environment. If you use `--restart=always`
    for this purpose (in your docker run command), follow these steps:
 
