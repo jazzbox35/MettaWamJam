@@ -149,7 +149,7 @@ metta(Request) :-
 
 %!  metta_stateless(+Request) is det.
 %
-%   Forks a new process to handle the request.
+%   Spawn a new process to handle the request.
 %   Child provides the response, then exits.
 %
 metta_stateless(Request) :-
@@ -167,7 +167,7 @@ metta_stateless(Request) :-
     % Build the goal string
     format(atom(Goal), 'run_stateless_child_from_file("~w", "~w")', [InputFile, OutputFile]),
     
-    % Fork the process with increased stack
+    % Spawn the process with increased stack
     process_create(
         path(swipl),
         ['--stack-limit=2g', '-g', Goal, '-t', 'halt', 'mwj.pl', '--', 'child'],
