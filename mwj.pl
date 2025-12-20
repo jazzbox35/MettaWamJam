@@ -183,7 +183,7 @@ metta_stateless(Request) :-
         delete_file(OutputFile),
         delete_file(InputFile)
     ;
-        Output = '{"error": "Child process failed"}'
+        Output = '{"error": "MeTTa query failed"}'
     ),
     
     % Return child's response
