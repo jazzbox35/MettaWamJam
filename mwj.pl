@@ -199,6 +199,9 @@ run_stateless_child_from_file(InputFile, OutputFile) :-
     % Read input
     read_file_to_string(InputFile, Body, []),
     
+     % Temporary priming query for debug
+    with_output_to(string(_), ( process_metta_string('!(+ 0 0)', _) ) ),
+
     % Process the MeTTa query
     with_output_to(string(_),
         (   process_metta_string(Body, Result),
