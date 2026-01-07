@@ -5,6 +5,8 @@ url = "http://localhost:5000/metta"
 headers = {"Content-Type": "text/plain; charset=utf-8" }
 
 # Place your MeTTa code below, start the MWJ server, and run this program under Python.
+
+# Clone this code to craft a user interface that calls MettaWamJam, or anything else needed!
 data = """
 
 !(let $a (is fun!) (cons-atom MeTTa $a))
