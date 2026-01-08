@@ -38,6 +38,11 @@
 %                       working_dir(Value), the working directory
 %*****************************************************************************
 
+% ----------------- MWJ configuration -----------------
+% Max seconds a spawned child process is allowed to run before SIGKILL (-9)
+mwj_child_time_limit(30.0).
+% -----------------------------------------------------
+
 
 % Import necessary modules for running an HTTP server, dispatching requests,
 % and making HTTP client calls.
@@ -174,8 +179,18 @@ metta_stateless(Request) :-
         [process(PID)]
     ),
     
+    mwj_child_time_limit(LimitSeconds),
+    catch(
+        call_with_time_limit(LimitSeconds, process_wait(PID, _)),
+        time_limit_exceeded,
+        (
+            process_kill(PID, kill),   % SIGKILL (-9)
+            process_wait(PID, _)       % reap zombie
+        )
+        ),
+
     % Wait for child process to complete
-    process_wait(PID, _Status),
+    %process_wait(PID, _Status),
     
     % Read output from file
     (exists_file(OutputFile) ->
